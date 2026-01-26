@@ -1,0 +1,52 @@
+# Event Sensing Module configuration
+# This file contains settings for the external event sensing agents
+
+module:
+  name: "External Event Sensing Module"
+  version: "1.0.0"
+  mode: "simulation"  # Options: simulation, live
+
+# Agent configurations
+agents:
+  news:
+    enabled: true
+    poll_interval_seconds: 60
+    keywords:
+      - "port closure"
+      - "shipping delay"
+      - "logistics disruption"
+      - "supply chain"
+      - "transport strike"
+      - "cargo"
+    # api_key: ""  # For future NewsAPI integration
+
+  weather:
+    enabled: true
+    poll_interval_seconds: 120
+    severity_threshold: "medium"  # low, medium, high, critical
+    event_types:
+      - "cyclone"
+      - "flood"
+      - "earthquake"
+      - "storm"
+      - "hurricane"
+    # api_key: ""  # For future OpenWeatherMap integration
+
+  economic:
+    enabled: false  # Future scope
+    
+  social:
+    enabled: false  # Future scope
+
+# Event processing settings
+aggregator:
+  deduplication_window_seconds: 300
+  max_events_buffer: 100
+
+normalizer:
+  confidence_threshold: 0.5
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
